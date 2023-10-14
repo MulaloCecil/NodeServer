@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        border: none;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registration Page</h1>
+    <form action="/register" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" name="surname" required>
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <input type="submit" value="Register">
+    </form>
+    <div id="success-message"></div>
+  
+    <script>
+      // Function to display the success message
+      function showSuccessMessage(message) {
+        const successMessageDiv = document.getElementById('success-message');
+        successMessageDiv.innerText = message;
+      }
+      
+      // Get the success message from the server response
+      const urlParams = new URLSearchParams(window.location.search);
+      const successMessage = urlParams.get('message');
+      
+      // If a success message is provided in the URL, display it
+      if (successMessage) {
+        showSuccessMessage(successMessage);
+        
+        // Store a confirmation session in localStorage
+        localStorage.setItem('confirmation', 'successful');
+      }
+      
+      // Check for a confirmation session in localStorage
+      const confirmationSession = localStorage.getItem('confirmation');
+      if (confirmationSession === 'successful') {
+        showSuccessMessage('Confirmation successful');
+      }
+    </script>
+</body>
+  </body>
+</html>
